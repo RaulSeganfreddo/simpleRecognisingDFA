@@ -31,7 +31,7 @@ void AbstractDFA::reset() {
  *            The current input.
  */
 void AbstractDFA::doStep(char letter) {
-    bool in_map = false; // variabile booleana utilizzata per assicurarsi che la lettera sia presente nella mappa. In caso contrario vedi sotto
+    bool in_map = false; // bool variable used to make sure that the given letter is in the map. If not see below
 
     /* Looking through transitions map, for the current state and the given letter there will be a precise state where to go.
     * considering that the pair current state and letter is the map's key.
@@ -45,7 +45,7 @@ void AbstractDFA::doStep(char letter) {
             break;
         }
     }
-    // Se la lettera data non e' presente nella mappa, l'automa va nel sink state
+    // If the given letter is not in map, the DFA goes into the sink state
     if (!in_map)
         current_state = n_states - 1;
 }
@@ -99,7 +99,7 @@ WordDFA::WordDFA(const string &word) : AbstractDFA(0) {
         states.push_back(i);
 
     /**
-    * For this DFA, the final state is only one, quindi so I insert only one value in the final states vector.
+    * For this DFA, the final state is only one, so I insert only one value in the final states vector.
     * Example: (0)-r->(1)-e->(2)-p->(3)-e->(4)-a->(5)-t->(6) (7) == sink state.
     * Considering that the word "repeat" has 6 characters, the final state will be 6.
     */
