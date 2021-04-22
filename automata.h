@@ -12,23 +12,17 @@ typedef std::pair<int, char> tpair;
  * Abstract class for Deterministic Finite Automata.
  */
 class AbstractDFA {
-	// TODO: use data structure for representing
-	// - states
-	// - final states (and sink states)
-	// - transitions of the form (state, input) -> state
-	// - current state
 
 protected:
-	std::vector<int> states; // vettore degli stati
-	std::vector<int> final_states; // vettore degli stati finali
-	int n_states; // variabile usata per tener conto del numero di stati
-	int current_state; // variabile usata per tener conto dello stato corrente
+	std::vector<int> states; // states vector
+	std::vector<int> final_states; // final states vector
+	int n_states; // variable used to store the total number of states
+	int current_state; // variable used to store the number of the current state
 
-	/** Dichiarazione della mappa delle transizioni:
-	* la chiave della mappa sara' un tpair (int, char) dove il primo int indica
-	* lo stato corrente, il char la lettera data mentre il secondo valore della map,
-	* un int, indichera' lo stato successivo basandosi sullo stato corrente e sulla
-	* lettera.
+	/** Transitions map declaration:
+	* the map's key will be a tpair (int, char) where the first int is the current state
+	* the char will be the given letter while the second map's value,
+	* an int, indicate the next state.
 	*/
 	std::map<tpair, int> mappa;
 
