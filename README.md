@@ -15,3 +15,10 @@ After compiling, with the test folder you can use:
 ```
 ./main test/test1.txt
 ```
+### Type of comments acceppted
+*//comment*
+*(&ast;comment&ast;)*
+*{comment}*
+
+
+This project is a work I made for my university (Universita' degli Studi di Padova) in the Automata and Formal Language course, so the "skeleton" of the project is made by them, just to be precise.
