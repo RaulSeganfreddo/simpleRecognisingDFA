@@ -10,7 +10,6 @@ using namespace std;
  *            Number of states in the DFA.
  */
 AbstractDFA::AbstractDFA(int noStates) {
-    // TODO: initialize data structures
     current_state = 0;
     n_states = noStates;
 }
@@ -19,7 +18,6 @@ AbstractDFA::AbstractDFA(int noStates) {
  * Reset the automaton to the initial state.
  */
 void AbstractDFA::reset() {
-    // TODO: reset automaton to initial state
     current_state = 0;
 }
 
@@ -33,12 +31,10 @@ void AbstractDFA::reset() {
  *            The current input.
  */
 void AbstractDFA::doStep(char letter) {
-    // TODO: do step by going to the next state according to the current
-    // state and the read letter.
     bool in_map = false; // variabile booleana utilizzata per assicurarsi che la lettera sia presente nella mappa. In caso contrario vedi sotto
 
-    /* scorro la mappa delle transizioni, per lo stato corrente e la lettera data ci sara' uno stato preciso in cui andare
-    * visto che la coppia stato corrente e lettera e' la key della mappa.
+    /* Looking through transitions map, for the current state and the given letter there will be a precise state where to go.
+    * considering that the pair current state and letter is the map's key.
     */
     for (auto m : mappa)
     {
@@ -60,8 +56,7 @@ void AbstractDFA::doStep(char letter) {
  * @return True, if the automaton is currently in the accepting state.
  */
 bool AbstractDFA::isAccepting() {
-    // TODO: return if the current state is accepting
-    // Scorro il vettore degli stati finali, se lo stato in cui mi trovo e' presente nel vettore allora l'automa accetta la parola data
+    // Scan final states vector, if my current state is in that vector, return true, else we return false
     for (int s : final_states)
     {
         if (s == current_state)
@@ -96,7 +91,6 @@ bool AbstractDFA::run(const string &inputWord) {
  *            A String that the automaton should recognize
  */
 WordDFA::WordDFA(const string &word) : AbstractDFA(0) {
-    // TODO: fill in correct number of states
 
     n_states = word.length() + 2; // vedi esempio sotto
 
@@ -105,19 +99,17 @@ WordDFA::WordDFA(const string &word) : AbstractDFA(0) {
         states.push_back(i);
 
     /**
-    * Per questo DFA, lo stato finale e' uno unico quindi inserisco un solo valore nel vettore degli stati finali.
-    * Esempio: (0)-r->(1)-e->(2)-p->(3)-e->(4)-a->(5)-t->(6) (7) == sink state.
-    * Quindi visto che la parola repeat ha 6 caratteri, lo stato accettante sara' 6.
+    * For this DFA, the final state is only one, quindi so I insert only one value in the final states vector.
+    * Example: (0)-r->(1)-e->(2)-p->(3)-e->(4)-a->(5)-t->(6) (7) == sink state.
+    * Considering that the word "repeat" has 6 characters, the final state will be 6.
     */
     final_states.push_back(word.length());
 
-    // TODO: build DFA recognizing the given word
-
     string input_word = word;
 
-    /** Eliminazione delle lettere doppie in word:
-    * questo perche' nella mappa delle transizioni che creo successivamente non ho bisogno di doppioni,
-    * altrimenti si creerebbero transizioni doppie.
+    /** Elimination of duplicate letters in the word:
+    * this because the transitions map created do not need duplicates
+    * otherwise will be created duplicate transitions.
     */
     for (int i = 0; i < input_word.length(); i++)
     {
@@ -130,8 +122,8 @@ WordDFA::WordDFA(const string &word) : AbstractDFA(0) {
         }
     }
 
-    /* Creazione mappa delle transizioni per WordDFA
-    * Nota: la mappa si crea per qualunque parola, non solo per repeat, basta cambiare la parola richiesta in main.cpp
+    /* Transitions map creations for WordDFA.
+    * Note: map is created for any word, not only for "repeat", you just need to changhe the word in main.cpp
     */
     string original = word;
 
@@ -154,15 +146,12 @@ WordDFA::WordDFA(const string &word) : AbstractDFA(0) {
  * multiline comments that starts with { and ends with }
  */
 CommentDFA::CommentDFA() : AbstractDFA(0) {
-    // TODO: fill in correct number of states
     current_state = 0;
     n_states = 10;
+    final_states.clear(); // empting final_states vector used previously
+    final_states.push_back(5); // insert of the final state in the final_states vector
 
-    // TODO: build DFA recognizing comments
-    final_states.clear(); // svuoto il vettore degli stati finali utilizzato precedentemente
-    final_states.push_back(5); // inserisco lo stato accettante nell'apposito vettore
-
-    for (int i = 0; i < n_states; i++) // riempio il vettore degli stati
+    for (int i = 0; i < n_states; i++) // filling states vector
         states.push_back(i);
 }
 
@@ -174,11 +163,10 @@ CommentDFA::CommentDFA() : AbstractDFA(0) {
  *            The current input.
  */
 void CommentDFA::doStep(char letter) {
-// TODO: implement accordingly
-    /** Questa volta, al posto della map, le transizioni vengono gestite attraverso un switch/case:
-    * Questo lo possiamo fare visto che il CommentDFA non cambia a seconda della parola data.
-    * Basta quindi solamente gestire i caratteri speciali utilizzati per creare i commenti,
-    * ad esempio parentesi e asterischi.
+    /** This time, instead of with the map, transitions are managed through a simple switch/case:
+    * We can do this because CommentDFA do not change in size depending on the given word.
+    * We just need to manage special characters used to create comments,
+    * like brackets and asterisks.
     */
     switch (current_state)
     {
