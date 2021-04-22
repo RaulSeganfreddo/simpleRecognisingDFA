@@ -1,8 +1,8 @@
-# simpleRecognisingDFA
-A simple DFA that recognise words and comments.
+# simpleRecognizingDFA
+A simple DFA that recognize words and comments.
 This DFA is the first part in the creation of a Lexer.
-A lexer should take an input string and split it in his base elements: tokens.
-This DFA job is to recognise specifics tokens.
+A *lexer* should take an input string and split it in his base elements: *tokens*.
+This DFA job is to recognize specifics tokens.
 
 ## Classes of the DFA
 In this little project we have 3 classes:
